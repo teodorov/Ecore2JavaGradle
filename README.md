@@ -5,7 +5,7 @@ all ecore models should be placed in a directory named "model"
 for each ecore model an associated genmodel should be created.
 
 add the following to the build.gradle
-
+>
 buildscript {
     repositories {
         maven {

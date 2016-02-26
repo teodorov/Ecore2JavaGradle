@@ -22,7 +22,7 @@ class Ecore2JavaTask extends DefaultTask {
 		//setup the standalone platform uri
 		new StandaloneSetup().with {
 			scanClassPath = true
-			platformUri = "./${project.name}"
+			platformUri = "${project.projectDir}"
 		}
 		//get all .genmodel files
 		def genmodelNames = project.file("model")

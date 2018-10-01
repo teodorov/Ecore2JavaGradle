@@ -7,16 +7,26 @@ buildscript {
     }
 }
 
-
 apply plugin: 'groovy'
 
 repositories { 
 	mavenCentral()
 }
 
+def emfVersion = "2.12.0"
+def codegenVersion = "2.11.0"
+
 dependencies {
-	compile 'org.eclipse.xtext:org.eclipse.xtext.xtext:2.7.3'
-	compile 'org.eclipse.xtext:org.eclipse.xtext.standalone:2.4.3'
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: emfVersion
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: emfVersion
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version: emfVersion
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen', version: codegenVersion
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen.ecore', version: codegenVersion
+    compile group: 'org.eclipse.platform', name: 'org.eclipse.equinox.app', version: '1.3.600'
+    compile group: 'org.eclipse.platform', name: 'org.eclipse.core.runtime', version: '3.15.0'
+    compile group: 'org.eclipse.platform', name: 'org.eclipse.core.resources', version: '3.13.100'
+    compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.launching', version: '3.11.0'
+
 	compile gradleApi()
 	compile localGroovy()
 }
@@ -30,8 +40,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-version=1.1
-group='org.ensta'
+version=1.4
+group='fr.ensta'
 
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
@@ -46,11 +56,17 @@ publishing {
             from components.java
         }
     }
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = "$buildDir/repo"
+        }
+    }
 }
 
 bintray {
-	user = bintray_user
-	key = bintray_api_key //this comes from the gradle.properties in ~/.gradle
+	user = bintrayUser
+	key = bintrayApiKey //this comes from the gradle.properties in ~/.gradle
 
 	publications = ['mavenJava']
 	dryRun = false
@@ -71,12 +87,7 @@ bintray {
             name = project.version //Bintray logical version name
             desc = 'initial release' //'optional, version-specific description'
             released  = new java.util.Date() //'optional, date of the version release' //2 possible values: date in the format of 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ' OR a java.util.Date instance
-//                vcsTag = '1.3.0'
-            attributes = ['gradle-plugin': 'org.ensta:org.ensta:ecore2java-plugin'] //Optional version-level attributes
-//                gpg {
-//                    sign = true //Determines whether to GPG sign the files. The default is false
-//                    passphrase = 'passphrase' //Optional. The passphrase for GPG signing'
-//                }
+            attributes = ['gradle-plugin': 'fr.ensta:fr.ensta:ecore2java-plugin'] //Optional version-level attributes
 		}
 	}
 }

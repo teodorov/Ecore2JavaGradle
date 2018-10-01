@@ -1,4 +1,4 @@
-package org.ensta
+package fr.ensta
 
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder

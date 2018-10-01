@@ -1,5 +1,6 @@
-package org.ensta
+package fr.ensta
 
+import fr.ensta.Ecore2JavaTask
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project

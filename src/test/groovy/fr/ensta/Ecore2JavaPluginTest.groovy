@@ -10,7 +10,7 @@ class Ecore2JavaPluginTest {
     public void ecore2javaPluginAddsEcore2JavaTaskToProject() {
         Project project = ProjectBuilder.builder().build()
 
-        //project.pluginsManager.apply 'org.ensta.ecore2java'
+        //project.pluginsManager.apply 'fr.ensta.ecore2java'
 
         //assertTrue(project.tasks.ecore2java instanceof Ecore2JavaTask)
     }
